@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html  lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf8">
+  <title>Custom Filter With CamanJS </title>
+  <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colpick.css" type="text/css"/>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="js/colpick.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="js/caman.full.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+</head>
+<body ng-controller="CamanCtrl">
+  <div class="lightbox applyeffect show">
+	<h1 class="h1">Caman<span>JS</span></h1>
+	<!-- <div class="image"> -->
+  <ul class="cta">
+    <li><span class="js_reset reset"><i class="icon icon-times"></i> Reset</span></li>
+    <li><span class="btn js_save save"><i class="icon icon-check"></i> Save</span></li>
+
+    <li>
+      <div class="fileUpload btn btn-primary">
+        <span>Import</span>
+        <input id="files" type="file" class="upload" />
+      </div>
+    </li>
+  </ul>
+  <div>
+		<div id="holder">
+      <span>Drag Photo Here</span>
+      <input type="file" name="file" id="file"/>
+  		</div>
+	<div id="Content">
+	<div id="Filters">
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>brightness</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="brightness">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>contrast</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="contrast">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>saturation</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="saturation">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>vibrance</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="vibrance">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>exposure</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="exposure">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>hue</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="0" max="100" step="1" value="0" data-filter="hue">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>sepia</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="0" max="100" step="1" value="0" data-filter="sepia">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>gamma</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="0" max="10" step="0.1" value="0" data-filter="gamma">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>clip</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="0" max="100" step="1" value="0" data-filter="clip">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>sharpen</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="0" max="100" step="1" value="0" data-filter="sharpen">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>stackBlur</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="0" max="20" step="1" value="0" data-filter="stackBlur">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+
+    <div class="Filter">
+      <div class="FilterName">
+        <p>vignette</p>
+      </div>
+
+      <div class="FilterSetting">
+        <input type="range" min="0" max="100" step="1" value="0" data-filter="vignette" data-name="size">
+        <span class="FilterValue">0</span>
+      </div>
+      <div class="FilterSetting">
+        <input type="range" min="0" max="100" step="1" value="0" data-filter="vignette" data-name="strength">
+        <span class="FilterValue">0</span>
+      </div>
+    </div>
+    <div class="Filter">
+    <ul class="custom show">
+      <li class="select">
+        <label>Curves</label>
+        <select name="curves">
+          <option>none</option>
+          <option value="1">Retro</option>
+          <option value="2">Greenish</option>
+          <option value="3">Reddish</option>
+        </select>
+      </li>
+      <li class="select">
+      <label>Custom Filters</label>
+      <select name="custom-filter">
+
+      </select>
+      <!-- <a href="#" class="remove-filter">remove x</a> -->
+    </li>
+    </ul>
+    </div>
+    <div class="Filter">
+       <div class="FilterName">
+        <p>Tint</p>
+      </div>
+
+      <div class='picker-wrapper'>
+        <input type="text" id="picker" data-name="color"></input>
+      </div>
+    </div>
+</div>
+
+
+  <div class="Clear"></div>
+  </div>
+</div>
+
+
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
