@@ -84,12 +84,7 @@ render = _.throttle(function() {
 }, 300);
 
 $(function() {
-
-  // if (!($("#example").length > 0)) {
-  //   return;
-  // }
   $('.reset').click(function(){
-    // $('#picker').colpickSetColor('')
     filters = {}
     $('.FilterSetting input').each(function() {
       var filter;
@@ -142,7 +137,6 @@ $(function() {
       return
     }
 
-    // var name = $(this).find('option[value="'+ this.value + '"]').text()
     filters = prefs[this.value]
      $('.FilterSetting input').each(function() {
         var filter;
@@ -185,7 +179,7 @@ $(function() {
     var title = prompt("Please enter filter name", "");
     if (title != null && title != "") {
       prefs[title] = filters
-      window.localStorage.setItem('ur_filters', JSON.stringify(prefs))
+      window.localStorage.setItem('fo_filters', JSON.stringify(prefs))
       var option = '<option value="' + title + '">' + title + '</option>'
       var select = $('select[name="custom-filter"]')
       select.append(option)
@@ -204,8 +198,8 @@ $(function() {
     }
   }
 
-  prefs = window.localStorage.getItem('ur_filters')
-  prefs = JSON.parse(prefs)
+  prefs = window.localStorage.getItem('fo_filters')
+  prefs = JSON.parse(prefs) || {}
   fillCustomFilters()
 
   Caman.Filter.register("reddish", function(adjust){
@@ -321,10 +315,6 @@ $(function() {
     });
   })
 
-
-
-  // caman = Caman('#example');
-  // presetCaman = Caman('#preset-example');
   $('.FilterSetting input').each(function() {
     var filter;
     filter = $(this).data('filter');
@@ -355,7 +345,7 @@ $(function() {
   });
 
   var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(prefs));
-  $('<li><span class="export btn"><a href="data:' + data + '" download="filters.json">Export</a></span></li>').appendTo('ul.cta');
+  $('<li><span class="export btn"><a href="data:' + data + '" download="filters.json">Export Custom Filter</a></span></li>').appendTo('ul.cta');
 
   var JsonObj = null;
 
@@ -364,11 +354,9 @@ function handleFileSelect(evt) {
     f = files[0];
     var reader = new FileReader();
 
-    // Closure to capture the file information.
     reader.onload = (function (theFile) {
         return function (e) {
             JsonObj = e.target.result
-            // console.log(JsonObj);
             prefs = JSON.parse(JsonObj);
             window.localStorage.setItem('ur_filters', JSON.stringify(prefs))
             fillCustomFilters()
@@ -385,100 +373,41 @@ document.getElementById('files').addEventListener('change', handleFileSelect, fa
 });
 
 
-var holder = document.getElementById('holder'),
-    tests = {
-      filereader: typeof FileReader != 'undefined',
-      dnd: 'draggable' in document.createElement('span'),
-      formdata: !!window.FormData,
-      // progress: "upload" in new XMLHttpRequest
-    },
-    support = {
-      filereader: document.getElementById('filereader'),
-      formdata: document.getElementById('formdata'),
-      // progress: document.getElementById('progress')
-    },
-    acceptedTypes = {
-      'image/png': true,
-      'image/jpeg': true,
-      'image/gif': true
-    },
-    // progress = document.getElementById('uploadprogress'),
-    fileupload = document.getElementById('upload');
-
-"filereader formdata".split(' ').forEach(function (api) {
-  if (tests[api] === false) {
-    support[api].className = 'fail';
-  } else {
-    support[api].className = 'hidden';
-  }
-});
+var holder = document.getElementById('holder')
 
 function previewfile(file) {
-  if (tests.filereader === true && acceptedTypes[file.type] === true) {
-    var reader = new FileReader();
-    reader.onload = function (event) {
-      var image = new Image();
-      image.src = event.target.result;
-      image.id = 'example'
-      holder.style.border = "none"
-			holder.innerHTML = "";
-      holder.appendChild(image);
-      caman = Caman('#example', function(){
-      	this.resize({
-      		width: 400
-      	})
-      	this.render();
-      });
-    };
+  var reader = new FileReader();
+  reader.onload = function (event) {
+    var image = new Image();
+    image.src = event.target.result;
+    image.id = 'example'
+    holder.style.border = "none"
+		holder.innerHTML = "";
+    holder.appendChild(image);
+    caman = Caman('#example', function(){
+    	this.resize({
+    		width: 400
+    	})
+    	this.render();
+    });
+  };
 
-    reader.readAsDataURL(file);
-  }  else {
-    holder.innerHTML += '<p>Uploaded ' + file.name + ' ' + (file.size ? (file.size/1024|0) + 'K' : '');
-    console.log(file);
-  }
+  reader.readAsDataURL(file);
 }
 
 function readfiles(files) {
-    // debugger;
-    var formData = tests.formdata ? new FormData() : null;
     for (var i = 0; i < files.length; i++) {
-      if (tests.formdata) formData.append('file', files[i]);
       previewfile(files[i]);
     }
-    // if (tests.formdata) {
-    //   var xhr = new XMLHttpRequest();
-    //   xhr.open('POST', '/devnull.php');
-    //   xhr.onload = function() {
-    //     // progress.value = progress.innerHTML = 100;
-    //   };
-		//
-    //   if (tests.progress) {
-    //     xhr.upload.onprogress = function (event) {
-    //       if (event.lengthComputable) {
-    //         var complete = (event.loaded / event.total * 100 | 0);
-    //         // progress.value = progress.innerHTML = complete;
-    //       }
-    //     }
-    //   }
-		//
-    //   xhr.send(formData);
-    // }
 }
 
-if (tests.dnd) {
-  holder.ondragover = function () { this.className = 'hover'; return false; };
-  holder.ondragend = function () { this.className = ''; return false; };
-  holder.ondrop = function (e) {
-    this.className = '';
-    e.preventDefault();
-    holder.innerHTML = "";
-    previewfile(e.dataTransfer.files[0]);
-  }
-} else {
-  fileupload.className = 'hidden';
-  fileupload.querySelector('input').onchange = function () {
-    readfiles(this.files);
-  };
+holder.ondragover = function () { this.className = 'hover'; return false; };
+holder.ondragend = function () { this.className = ''; return false; };
+holder.ondrop = function (e) {
+  this.className = '';
+  e.preventDefault();
+  holder.innerHTML = "";
+  previewfile(e.dataTransfer.files[0]);
 }
 
 $('input#file').change(function(){
