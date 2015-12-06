@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html  lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf8">
-  <title>CamanJS-Panel</title>
+  <title>Custom Filter With CamanJS </title>
   <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/example.css">
     <link rel="stylesheet" href="css/colpick.css" type="text/css"/>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="js/colpick.js" type="text/javascript"></script>
-    
+
      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
     <script src="js/caman.full.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-    <!--<script src="js/main.js"></script> -->
-    <script src="js/example.js"></script>
 </head>
 <body ng-controller="CamanCtrl">
   <div class="lightbox applyeffect show">
@@ -33,12 +30,13 @@
   <div>
 		<div id="holder">
       <span>Drag Photo Here</span>
-  		</div> 
+      <input type="file" name="file" id="file"/>
+  		</div>
 		<!-- <img id="example" src="images/test.jpg"/> -->
 	<!-- </div> -->
 	<div id="Content">
 	<div id="Filters">
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>brightness</p>
@@ -49,7 +47,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>contrast</p>
@@ -60,7 +58,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>saturation</p>
@@ -71,7 +69,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>vibrance</p>
@@ -82,7 +80,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>exposure</p>
@@ -93,7 +91,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>hue</p>
@@ -104,7 +102,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>sepia</p>
@@ -115,7 +113,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>gamma</p>
@@ -126,7 +124,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <!-- <div class="Filter">
       <div class="FilterName">
         <p>noise</p>
@@ -137,7 +135,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div> -->
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>clip</p>
@@ -148,7 +146,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>sharpen</p>
@@ -159,7 +157,7 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-  
+
     <div class="Filter">
       <div class="FilterName">
         <p>stackBlur</p>
@@ -170,38 +168,6 @@
         <span class="FilterValue">0</span>
       </div>
     </div>
-
-
-   <!--  <div class="Filter">
-      <div class="FilterName">
-        <p>Tint C</p>
-      </div>
-
-      <div class="FilterSetting">
-        <input type="range" min="0" max="100" step="1" value="0" data-filter="tint" data-name="c">
-        <span class="FilterValue">0</span>
-      </div>
-    </div>
-    <div class="Filter">
-      <div class="FilterName">
-        <p>Tint M</p>
-      </div>
-
-      <div class="FilterSetting">
-        <input type="range" min="0" max="100" step="1" value="0" data-filter="tint" data-name="m">
-        <span class="FilterValue">0</span>
-      </div>
-    </div>
-    <div class="Filter">
-      <div class="FilterName">
-        <p>Tint Y</p>
-      </div>
-
-      <div class="FilterSetting">
-        <input type="range" min="0" max="100" step="1" value="0" data-filter="tint" data-name="y">
-        <span class="FilterValue">0</span>
-      </div>
-    </div> -->
 
     <div class="Filter">
       <div class="FilterName">
@@ -231,7 +197,7 @@
       <li class="select">
       <label>Custom Filters</label>
       <select name="custom-filter">
-        
+
       </select>
       <!-- <a href="#" class="remove-filter">remove x</a> -->
     </li>
@@ -241,212 +207,31 @@
        <div class="FilterName">
         <p>Tint</p>
       </div>
-      <!-- <div class="FilterSetting">
-        <input type="range" min="0" max="100" step="1" value="0" data-filter="vignette" data-name="size">
-        <span class="FilterValue">0</span>
-      </div>
-      <div class="FilterSetting">
-        <input type="range" min="0" max="100" step="1" value="0" data-filter="vignette" data-name="strength">
-        <span class="FilterValue">0</span>
-      </div> -->
+
       <div class='picker-wrapper'>
         <input type="text" id="picker" data-name="color"></input>
         <!-- <a href="#" class="removeTint">remove tint</a> -->
       </div>
     </div>
 </div>
-  
+
 
   <div class="Clear"></div>
   </div>
 </div>
 
-	<!-- <div class="sliderset">
-        <div class="slider white" name="brightness"></div> -->
-        <!-- <div class="slider blue"></div>
-        <div class="slider green"></div>
-        <div class="slider black"></div>
-        <div class="slider white"></div> -->
-      <!-- </div>
-	<ul class="custom show"> -->
-		<!-- <li>
-			<label>Brightness</label>
-			<div class="slider"><div class="progress"></div><a href="#" class="handle" style="left: 192.5px;"></a></div><input type="text" data-orig-type="range" name="brightness" min="-255" max="255" step="1" value="{{brightness}}" class="range">
-		</li>
-		<li>
-			<label>Contrast</label>
-			<div class="slider"><div class="progress"></div><a href="#" class="handle" style="left: 192.5px;"></a></div><input type="text" data-orig-type="range" name="contrast" min="-255" max="255" step="1" value="{{contrast}}" class="range">
-		</li>
-		<li>
-			<label>Vignette</label>
-			<div class="slider"><div class="progress" style="width: 7.5px;"></div><a href="#" class="handle" style="left: 0px;"></a></div><input type="text" data-orig-type="range" name="vignette" min="0" max="1" step="0.01" value="vignette" data-progress="true" class="range">
-		</li>
-		<li>
-			<label>Lighten center</label>
-			<div class="slider"><div class="progress" style="width: 7.5px;"></div><a href="#" class="handle" style="left: 0px;"></a></div><input type="text" data-orig-type="range" name="lighten" min="0" max="1" step="0.01" value="{{lightenCenter}}" data-progress="true" class="range">
-		</li>
-		<li>
-			<label>Desaturate</label>
-			<div class="slider"><div class="progress" style="width: 7.5px;"></div><a href="#" class="handle" style="left: 0px;"></a></div><input type="text" data-orig-type="range" name="desaturate" min="0" max="1" step="0.01" value="{{desaturate}}" data-progress="true" class="range">
-		</li>
-		<li>
-			<label>Noise</label>
-			<div class="slider"><div class="progress" style="width: 7.5px;"></div><a href="#" class="handle" style="left: 0px;"></a></div><input type="text" data-orig-type="range" name="noise" min="0" max="50" step="1" value="{{noise}}" data-progress="true" class="range">
-		</li> -->
-		<!-- <li class="radiocheck">
-			<label>Sepia</label>
-			<label class="checkbox"><input type="checkbox" name="sepia" value="1"></label>
-		</li>
-		<li class="select">
-			<label>Curves</label>
-			<select name="curves">
-				<option>none</option>
-				<option value="1">Retro</option>
-				<option value="2">Enhance</option>
-			</select>
-		</li>
 
-		<li class="select">
-			<label>Tint strength</label> -->
-			<!-- <div class="slider">
-				<div class="progress" style="width: 7.5px;"></div>
-				<a href="#" class="handle" style="left: 0px;"></a>
-			</div>
-			<input type="text" data-orig-type="range" name="screen" min="0" max="1" step="0.01" value="0" data-progress="true" class="range"> -->
-		<!-- 	<label class="newrow">Tint color</label>
-			<ul class="colors js_colors">
-				<li style="background-color:#e30ca9" data-color="#e30ca9">#e30ca9</li>
-				<li style="background-color:#b26282" data-color="#b26282">#b26282</li>
-				<li style="background-color:#ff0000" data-color="#ff0000" class="selected">#ff0000</li>
-				<li style="background-color:#ffff00" data-color="#ffff00" class="">#ffff00</li>
-				<li style="background-color:#00ff00" data-color="#00ff00">#00ff00</li>
-				<li style="background-color:#00ffff" data-color="#00ffff">#00ffff</li>
-				<li style="background-color:#0000ff" data-color="#0000ff">#0000ff</li>
-				<li style="background-color:#6cacbb" data-color="#6cacbb">#6cacbb</li>
-			</ul>
-		</li>
-	</ul> -->
-</div>  
+</div>
 <article>
   <!-- <div id="holder">
   </div>  -->
   <p id="upload" class="hidden"><label>Drag &amp; drop not supported, but you can still upload via this input field:<br><input type="file"></label></p>
   <p id="filereader">File API &amp; FileReader API not supported</p>
   <p id="formdata">XHR2's FormData is not supported</p>
-  <p id="progress">XHR2's upload progress isn't supported</p>
-  <p>Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
-  <p>Drag an image from your desktop on to the drop zone above to see the browser both render the preview, but also upload automatically to this server.</p>
+  <!-- <p id="progress">XHR2's upload progress isn't supported</p> -->
+  <!-- <p><progress id="uploadprogress" min="0" max="100" value="0"></progress></p> -->
+  <p></p>
 </article>
-<script>
-var holder = document.getElementById('holder'),
-    tests = {
-      filereader: typeof FileReader != 'undefined',
-      dnd: 'draggable' in document.createElement('span'),
-      formdata: !!window.FormData,
-      progress: "upload" in new XMLHttpRequest
-    }, 
-    support = {
-      filereader: document.getElementById('filereader'),
-      formdata: document.getElementById('formdata'),
-      progress: document.getElementById('progress')
-    },
-    acceptedTypes = {
-      'image/png': true,
-      'image/jpeg': true,
-      'image/gif': true
-    },
-    progress = document.getElementById('uploadprogress'),
-    fileupload = document.getElementById('upload');
-
-"filereader formdata progress".split(' ').forEach(function (api) {
-  if (tests[api] === false) {
-    support[api].className = 'fail';
-  } else {
-    // FFS. I could have done el.hidden = true, but IE doesn't support
-    // hidden, so I tried to create a polyfill that would extend the
-    // Element.prototype, but then IE10 doesn't even give me access
-    // to the Element object. Brilliant.
-    support[api].className = 'hidden';
-  }
-});
-
-function previewfile(file) {
-  if (tests.filereader === true && acceptedTypes[file.type] === true) {
-    var reader = new FileReader();
-    reader.onload = function (event) {
-      var image = new Image();
-      image.src = event.target.result;
-      image.id = 'example'
-      // image.width = 800; // a fake resize
-      // image.setAttribute("data-camanwidth", "800")
-      // image.setAttribute("data-camanheight", "500")
-      holder.style.border = "none"
-      holder.appendChild(image);
-      caman = Caman('#example', function(){
-      	this.resize({
-      		width: 400
-      	})
-      	this.render();
-      });
-     //  caman.resize({
-    	// width: 500,
-    	// height: 300
-  	  // });
-    };
-
-    reader.readAsDataURL(file);
-  }  else {
-    holder.innerHTML += '<p>Uploaded ' + file.name + ' ' + (file.size ? (file.size/1024|0) + 'K' : '');
-    console.log(file);
-  }
-}
-
-function readfiles(files) {
-    debugger;
-    var formData = tests.formdata ? new FormData() : null;
-    for (var i = 0; i < files.length; i++) {
-      if (tests.formdata) formData.append('file', files[i]);
-      previewfile(files[i]);
-    }
-
-    // now post a new XHR request
-    if (tests.formdata) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/devnull.php');
-      xhr.onload = function() {
-        progress.value = progress.innerHTML = 100;
-      };
-
-      if (tests.progress) {
-        xhr.upload.onprogress = function (event) {
-          if (event.lengthComputable) {
-            var complete = (event.loaded / event.total * 100 | 0);
-            progress.value = progress.innerHTML = complete;
-          }
-        }
-      }
-
-      xhr.send(formData);
-    }
-}
-
-if (tests.dnd) { 
-  holder.ondragover = function () { this.className = 'hover'; return false; };
-  holder.ondragend = function () { this.className = ''; return false; };
-  holder.ondrop = function (e) {
-    this.className = '';
-    e.preventDefault();
-    // readfiles(e.dataTransfer.files);
-    holder.innerHTML = "";
-    previewfile(e.dataTransfer.files[0]);
-  }
-} else {
-  fileupload.className = 'hidden';
-  fileupload.querySelector('input').onchange = function () {
-    readfiles(this.files);
-  };
-}
-
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>
